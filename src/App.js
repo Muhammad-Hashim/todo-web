@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+
+  const handleTodoChange = useCallback((e) => {
+     e.preventDefault();
+    setInput(e.target.value);
+  },[]);
+
+  const addTodo = useCallback(
+    (e) => {
+       e.preventDefault();
+      if (input.trim() !== "") {
+        setTodos([...todos, input]);
+        setInput("");
+      }
+    },
+    [input, todos]
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={addTodo}>
+        <div>
+          <h1>Todo</h1>
+          <input type="text" onChange={handleTodoChange} />
+          <button type="submit">Add</button>
+          {todos.map((todo, index) => (
+            <p key={index}>{todo}</p>
+          ))}
+        </div>
+      </form>
     </div>
   );
 }
