@@ -1,0 +1,103 @@
+/* Styles for the outer container */
+.App {
+    padding:30px ;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Full viewport height */
+    background-color: #113058; /* Background color of the entire app */
+  }
+  
+  /* Styles for the Todo container */
+  .Todo {
+    text-align: center;
+    background-color: #ffffff; /* Background color of the Todo container */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 700px; /* Adjust the width as needed */
+  }
+  
+  /* Styles for the Todo input field */
+  input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the Add button */
+  button[type="submit"] {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the Todo items */
+  p {
+    background-color: #f7f7f7; /* Background color of each Todo item */
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: start;
+    background-color: #113058; 
+  }
+  
+
+
+  /* CSS for task items */
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 4px;
+    background-color: #113058; 
+color: #ffffff;
+  }
+  
+  /* CSS for Delete button */
+  .task button.delete-btn {
+    background-color: #ff5757;
+    color: #fff;
+    border: none;
+    margin: 5px;
+    padding: 10px 50px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* CSS for Edit button */
+  .task button {
+    background-color: #4287f5;
+    color: #fff;
+    border: none;
+    margin: 5px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Add hover effects */
+  .task button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Optional: Style for the task title */
+  .task .title {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  

@@ -1,35 +1,78 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-
+import axios from "axios";
 function App() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost/")
+      .then((response) => setTodos(response.data))
+      .catch((error) => console.error("Error fetching todos:", error));
+  }, [todos]);
+  
+ const handleSubmit = (e) => {
+    e.preventDefault();
+   
+   
+ }
 
   const handleTodoChange = useCallback((e) => {
-     e.preventDefault();
     setInput(e.target.value);
-  },[]);
+  }, []);
 
-  const addTodo = useCallback(
-    (e) => {
-       e.preventDefault();
-      if (input.trim() !== "") {
-        setTodos([...todos, input]);
-        setInput("");
-      }
-    },
-    [input, todos]
-  );
+
+
+  const addTodo = (e) => {
+    e.preventDefault()
+      axios.post("http://localhost/", { input }).then((res) => {
+      setTodos([...todos, res.data]);
+      setInput("");
+    });
+  };
+
+
+
+
+const onDelete = (id,e) => {
+     e.preventDefault();
+  axios
+    .delete(`http://localhost:80/delete/${id}`)
+    .then(() => {
+      setTodos((prevTodos) => prevTodos.filter((to) => to._id !== id));
+    })
+    .catch((error) => console.error("Error deleting todo:", error));
+};
 
   return (
     <div className="App">
-      <form onSubmit={addTodo}>
-        <div>
+      <form>
+        <div className="Todo" onSubmit={(e)=>handleSubmit(e)}>
           <h1>Todo</h1>
-          <input type="text" onChange={handleTodoChange} />
-          <button type="submit">Add</button>
-          {todos.map((todo, index) => (
-            <p key={index}>{todo}</p>
+          <input
+            type="text"
+            onChange={handleTodoChange}
+            value={input}
+            aria-label="Todo input"
+          />
+          <button
+            type="submit"
+            onClick={addTodo}
+            aria-label="Add todo"
+            disabled={input.trim() === ""}
+          >
+            Add
+          </button>
+          {todos.map((items) => (
+            <p className="task" key={items._id}>
+              {items.title}
+              <div>
+                <button onClick={(e) => onDelete(items._id, e)}>Delete</button>
+                
+                 
+              </div>
+            </p>
           ))}
         </div>
       </form>
