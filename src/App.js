@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost/")
+      .get("/")
       .then((response) => setTodos(response.data))
       .catch((error) => console.error("Error fetching todos:", error));
   }, [todos]);
@@ -26,7 +26,7 @@ function App() {
 
   const addTodo = (e) => {
     e.preventDefault()
-      axios.post("http://localhost/", { input }).then((res) => {
+      axios.post("/", { input }).then((res) => {
       setTodos([...todos, res.data]);
       setInput("");
     });
@@ -38,7 +38,7 @@ function App() {
 const onDelete = (id,e) => {
      e.preventDefault();
   axios
-    .delete(`http://localhost:80/delete/${id}`)
+    .delete(`/delete/${id}`)
     .then(() => {
       setTodos((prevTodos) => prevTodos.filter((to) => to._id !== id));
     })
